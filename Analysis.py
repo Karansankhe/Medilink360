@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Example data
+
 data = {
     'PatientID': [1, 2, 3, 4, 5],
     'Age': [35, 42, 28, 50, 65],
@@ -14,16 +14,16 @@ data = {
 
 patient_data = pd.DataFrame(data)
 
-# Streamlit App
-st.title('Single Patient Data Analysis App')
 
-# Allow the user to select a patient
+st.title('EHR ANALYSIS OF EACH PATIENT')
+
+
 selected_patient = st.selectbox('Select a patient:', patient_data['PatientID'])
 
-# Filter the data for the selected patient
+
 selected_patient_data = patient_data[patient_data['PatientID'] == selected_patient]
 
-# Display selected patient information
+
 st.subheader('Selected Patient Information:')
 st.dataframe(selected_patient_data)
 

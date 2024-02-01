@@ -4,16 +4,16 @@ import os
 import google.generativeai as genai
 from PIL import Image
 
-load_dotenv()  # Load all the environment variables
+load_dotenv()  
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-# Function to load Google Gemini Pro Vision API And get response
+
 def get_gemini_response(input, image, prompt):
     model = genai.GenerativeModel('gemini-pro-vision')
     response = model.generate_content([input, image[0], prompt])
     return response.text
 
-# Function to set up image data
+
 def input_image_setup(uploaded_file):
     if uploaded_file is not None:
         bytes_data = uploaded_file.getvalue()
@@ -28,7 +28,6 @@ def input_image_setup(uploaded_file):
     else:
         raise FileNotFoundError("No file uploaded")
 
-# Function to get emergency information for India
 def get_emergency_information_india():
     emergency_info_india = """
     In case of emergency in India, please follow these general guidelines:
@@ -43,8 +42,8 @@ def get_emergency_information_india():
     """
     return emergency_info_india
 
-# Initialize Streamlit app
-st.set_page_config(page_title="Gemini Health App")
+
+st.set_page_config(page_title="personal nutritionist")
 
 st.header("Gemini Health App")
 input_prompt = """
@@ -68,28 +67,27 @@ if uploaded_file is not None:
 
 submit = st.button("Tell me the total calories")
 
-# If submit button is clicked
+
 if submit:
     image_data = input_image_setup(uploaded_file)
     response = get_gemini_response(input_prompt, image_data, input_text)
     st.subheader("The Response is")
     st.write(response)
 
-# Add emergency information section for India
 st.sidebar.title("Emergency Information (India)")
 st.sidebar.write(get_emergency_information_india())
 
-# Add buttons to display educational videos
+
 st.header("Educational Videos")
 
 if st.button("Nutrition Tips"):
-    # Video on Nutrition
+  
     nutrition_video_url = "https://www.youtube.com/watch?v=example_nutrition_video"
     st.subheader("Nutrition Tips")
     st.video(nutrition_video_url)
 
 if st.button("Emergency First Aid"):
-    # Video on Emergency First Aid
+   
     first_aid_video_url = "https://www.youtube.com/watch?v=example_first_aid_video"
     st.subheader("Emergency First Aid")
     st.video(first_aid_video_url)

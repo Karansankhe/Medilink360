@@ -3,23 +3,23 @@ import speech_recognition as sr
 from summarizer import Summarizer
 
 def speech_to_text():
-    # Initialize the recognizer with pocketsphinx
+    
     recognizer = sr.Recognizer()
 
-    # Capture audio from the microphone
+    
     with sr.Microphone() as source:
         st.info("Listening... Speak into your microphone.")
 
-        # Adjusting recognition based on ambient noise
+    
         recognizer.adjust_for_ambient_noise(source)
 
         try:
-            # Use pocketsphinx to convert speech to text
+           
             audio = recognizer.listen(source)
             text = recognizer.recognize_sphinx(audio)
             st.success(f"You said: {text}")
 
-            # Summarize the text using BERT-based summarizer
+           
             summarizer = Summarizer()
             summary = summarizer(text)
             st.info("Summary:")
